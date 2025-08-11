@@ -578,9 +578,8 @@
         </div>
     </footer>
 
-    <!-- Curtain Elements -->
-    <div class="curtain curtain-left"></div>
-    <div class="curtain curtain-right"></div>
+    <!-- Credit -->
+    <div style="position: fixed; bottom: 10px; right: 10px; font-size: 10px; color: #999; z-index: 1000;">Made By SnowBase</div>
 
     <script>
         // Smooth scrolling for anchor links
@@ -620,123 +619,13 @@
             // Trigger initial animation
             setTimeout(animateOnScroll, 300);
 
-            // Add instructions for keyboard shortcuts
-            const instructions = document.createElement('div');
-            instructions.style.position = 'fixed';
-            instructions.style.bottom = '20px';
-            instructions.style.right = '20px';
-            instructions.style.backgroundColor = 'rgba(0,0,0,0.7)';
-            instructions.style.color = 'white';
-            instructions.style.padding = '10px 15px';
-            instructions.style.borderRadius = '5px';
-            instructions.style.zIndex = '1001';
-            instructions.style.fontSize = '14px';
-            instructions.innerHTML = 'Press <strong>B</strong> for bubbles<br>Press <strong>C</strong> for curtains';
-            document.body.appendChild(instructions);
-
-            // Remove instructions after 10 seconds
-            setTimeout(() => {
-                instructions.style.transition = 'opacity 1s';
-                instructions.style.opacity = '0';
-                setTimeout(() => instructions.remove(), 1000);
-            }, 10000);
+            // No instructions needed
         });
 
         // Add scroll event listener
         window.addEventListener('scroll', animateOnScroll);
 
-        // Create bubbles when 'b' key is pressed
-        document.addEventListener('keydown', (e) => {
-            // Bubbles on 'b' key
-            if (e.key.toLowerCase() === 'b') {
-                createBubbles(15);
-            }
-            
-            // Curtains on 'c' key
-            if (e.key.toLowerCase() === 'c') {
-                toggleCurtains();
-            }
-        });
-
-        // Toggle curtains open/closed
-        let curtainsOpen = false;
-        function toggleCurtains() {
-            const body = document.body;
-            curtainsOpen = !curtainsOpen;
-            
-            if (curtainsOpen) {
-                body.classList.remove('curtains-closed');
-                body.classList.add('curtains-open');
-            } else {
-                body.classList.remove('curtains-open');
-                body.classList.add('curtains-closed');
-                
-                // Auto-close curtains after 3 seconds
-                setTimeout(() => {
-                    if (curtainsOpen) {
-                        toggleCurtains();
-                    }
-                }, 3000);
-            }
-        }
-
-        // Create realistic bubbles
-        function createBubbles(count) {
-            for (let i = 0; i < count; i++) {
-                setTimeout(() => {
-                    const bubble = document.createElement('div');
-                    bubble.className = 'bubble';
-                    
-                    // Random size between 15px and 60px for better visibility
-                    const size = Math.random() * 45 + 15;
-                    bubble.style.width = `${size}px`;
-                    bubble.style.height = `${size}px`;
-                    
-                    // Random position across the screen
-                    bubble.style.left = `${Math.random() * 100}%`;
-                    
-                    // Random animation duration between 3s and 7s
-                    const duration = Math.random() * 4 + 3;
-                    bubble.style.animationDuration = `${duration}s`;
-                    
-                    // Random opacity for visual interest
-                    bubble.style.opacity = Math.random() * 0.4 + 0.6;
-                    
-                    // Random horizontal movement (-100px to 100px)
-                    const xMovement = (Math.random() - 0.5) * 200;
-                    bubble.style.setProperty('--x-movement', `${xMovement}px`);
-                    
-                    // Random delay for more natural appearance
-                    bubble.style.animationDelay = `${Math.random() * 2}s`;
-                    
-                    // Add subtle scale animation
-                    const scale = 0.8 + Math.random() * 0.4;
-                    bubble.style.transform = `scale(${scale})`;
-                    
-                    document.body.appendChild(bubble);
-                    
-                    // Add hover effect
-                    bubble.addEventListener('mouseover', () => {
-                        bubble.style.transform = `scale(${scale * 1.2})`;
-                    });
-                    
-                    bubble.addEventListener('mouseout', () => {
-                        bubble.style.transform = `scale(${scale})`;
-                    });
-                    
-                    // Remove bubble after animation completes
-                    setTimeout(() => {
-                        if (bubble.parentNode) {
-                            bubble.style.opacity = '0';
-                            bubble.style.transition = 'opacity 0.5s ease-out';
-                            setTimeout(() => {
-                                if (bubble.parentNode) bubble.remove();
-                            }, 500);
-                        }
-                    }, (duration - 0.5) * 1000);
-                }, i * 150); // Stagger the creation of bubbles
-            }
-        }
+        // No bubble or curtain functionality
     </script>
 </body>
 </html>
